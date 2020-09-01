@@ -1,0 +1,65 @@
+<p id="notice"></p>
+<br>
+<% if @book.errors.any? %>
+    <div id="error_explanation" class="alert">
+        <h2><%= @book.errors.count %>errors prohibited obj from being saved:</h2>
+            <ul>
+            <% @book.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+            </ul>
+    </div>
+<% end %>
+
+
+
+<div class="col-xs-3">
+	<div class="profile-container">
+	<h2 class="profile-name">User info</h2>
+
+	<%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>name</th>
+				<th><%= user.name %></th>
+			</tr>
+			<tr>
+				<th>introduction</th>
+				<th><%= user.introduction %></th>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+
+
+
+	<div class="row">
+		<% if user.id == current_user.id %>
+
+		<p><%= link_to "",edit_user_path(user),class:"edit_user_#{user.id} col-xs-12 btn btn-default glyphicon glyphicon-wrench" %></p>
+		<% end %>
+	</div>
+
+	<div class="field row">
+	<h2>New book</h2>
+	<%= form_for(book) do |f| %>
+
+	<div class="field row">
+	<lavel>Title</lavel>
+	<%= f.text_field :title, class:"book_title col-xs-12 book_title" %>
+	</div>
+
+	<div class="field row">
+	<lavel>Opinion</lavel>
+	<%= f.text_area :body, class:"book_body col-xs-12 book_opinion" %>
+	</div>
+
+	<br>
+	<div class="action row">
+	<%= f.submit 'Create Book', class:"btn btn-primary col-xs-12" %>
+	</div>
+	<% end %>
+
+	</div>
+</div>
